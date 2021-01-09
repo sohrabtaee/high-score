@@ -46,13 +46,21 @@ function Form({ onSubmit }) {
         value={name}
         onInput={(e) => setName(e.target.value)}
         autoFocus
+        data-testid="name"
       />
-      <p>Your score is: {score}</p>
-      <button type="button" onClick={updateScore}>
+      <p data-testid="score">Your score is: {score}</p>
+      <button type="button" onClick={updateScore} data-testid="get-score">
         Get a score
       </button>
-      <p>You have {tries} tries left, after that your score will reset to 0.</p>
-      <button type="submit" onClick={submitScore} className="submit-button">
+      <p data-testid="tries">
+        You have {tries} tries left, after that your score will reset to 0.
+      </p>
+      <button
+        type="submit"
+        onClick={submitScore}
+        className="submit-button"
+        data-testid="submit"
+      >
         Submit score
       </button>
     </form>

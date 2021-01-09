@@ -15,7 +15,7 @@ function LeaderBoard({ leaderBoard }) {
       </thead>
       <tbody>
         {sortedBoard.map((person, i) => (
-          <tr key={i}>
+          <tr key={i} data-testid="person">
             <td>{person.name}</td>
             <td>{person.totalPoints}</td>
             <td>{person.clicks}</td>
