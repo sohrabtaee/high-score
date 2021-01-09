@@ -17,8 +17,18 @@ function App() {
       body: JSON.stringify(data),
     })
       .then(() => {
-        const board = [...leaderBoard, data]
-        setLeaderBoard(board)
+        const index = leaderBoard.findIndex(
+          (person) => person.name === data.name
+        )
+        if (index !== -1) {
+          const board = [...leaderBoard]
+          board[index].totalPoints += data.totalPoints
+          board[index].clicks += data.clicks
+          setLeaderBoard(board)
+        } else {
+          const board = [...leaderBoard, data]
+          setLeaderBoard(board)
+        }
       })
       .catch((error) => console.error(error))
   }
