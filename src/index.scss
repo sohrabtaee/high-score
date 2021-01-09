@@ -1,0 +1,74 @@
+$main-color: #248bd2;
+$light-color: #dcecf8;
+$dark-gray: #333;
+$border-radius: 6px;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  color: $dark-gray;
+}
+
+label {
+  display: block;
+}
+
+input {
+  padding: 0.5em 1em;
+  border-radius: $border-radius;
+  outline-color: $main-color;
+  border: 1px solid $dark-gray;
+}
+
+button {
+  padding: 0.5em 1em;
+  border-radius: $border-radius;
+  background-color: #fff;
+  border: 1px solid $main-color;
+  color: $main-color;
+}
+
+.app {
+  padding: 1em;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .submit-button {
+    background-color: $main-color;
+    color: #fff;
+  }
+}
+
+.leader-board {
+  width: 100%;
+  margin-bottom: 2em;
+  border: 1px solid $dark-gray;
+  text-align: left;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 0.25em 0.5em;
+  }
+
+  thead th {
+    border-bottom: 1px solid $dark-gray;
+  }
+
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: $light-color;
+    }
+  }
+}

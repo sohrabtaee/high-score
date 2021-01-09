@@ -1,73 +1,32 @@
 import { useState } from 'react'
-import './App.scss'
+import Form from './Form'
+import LeaderBoard from './LeaderBoard'
 
-const MAX_SCORE = 100
-const TRIES = 10
+const DUMMY_RESULT = [
+  { name: 'Jane Doe', totalPoints: 157, clicks: 5 },
+  { name: 'Lily Allen', totalPoints: 234, clicks: 8 },
+  { name: 'John Smith', totalPoints: 390, clicks: 10 },
+]
 
 function App() {
-  const [name, setName] = useState('')
-  const [score, setScore] = useState(0)
-  const [tries, setTries] = useState(TRIES)
+  const [leaderBoard, setLeaderBoard] = useState(DUMMY_RESULT)
 
-  const resetForm = () => {
-    setScore(0)
-    setTries(TRIES)
-    setName('')
-  }
-
-  const updateScore = () => {
-    const random = Math.random() * MAX_SCORE * 2
-    const score = Math.round(random - MAX_SCORE)
-
-    if (tries === 0) {
-      resetForm()
-    } else {
-      setScore(score)
-      setTries(tries - 1)
-    }
-  }
-
-  const submitScore = (e) => {
-    e.preventDefault()
-
-    const data = {
-      name,
-      score,
-      tries,
-    }
+  const submitScore = (data) => {
     fetch('dummy-url', {
       method: 'POST',
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then(() => {
+        const board = [...leaderBoard, data]
+        setLeaderBoard(board)
+      })
       .catch((error) => console.error(error))
-
-    resetForm()
   }
 
   return (
-    <div className="high-score">
-      <form>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onInput={(e) => setName(e.target.value)}
-          autoFocus
-        />
-        <p>Your score is: {score}</p>
-        <button type="button" onClick={updateScore}>
-          Get a score
-        </button>
-        <p>
-          You have {tries} tries left, after that your score will reset to 0.
-        </p>
-        <button type="submit" onClick={submitScore}>
-          Submit score
-        </button>
-      </form>
+    <div className="app">
+      <LeaderBoard leaderBoard={leaderBoard} />
+      <Form onSubmit={submitScore} />
     </div>
   )
 }
