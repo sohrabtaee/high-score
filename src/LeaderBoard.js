@@ -1,7 +1,7 @@
 function LeaderBoard({ leaderBoard }) {
   const sortedBoard = leaderBoard.map((person) => ({
     ...person,
-    averagePoints: person.totalPoints / person.clicks,
+    averagePoints: Math.round(person.totalPoints / person.clicks),
   }))
   sortedBoard.sort((a, b) => {
     return b.totalPoints - a.totalPoints
