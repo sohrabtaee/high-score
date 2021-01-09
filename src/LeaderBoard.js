@@ -1,5 +1,8 @@
 function LeaderBoard({ leaderBoard }) {
-  const sortedBoard = [...leaderBoard]
+  const sortedBoard = leaderBoard.map((person) => ({
+    ...person,
+    averagePoints: person.totalPoints / person.clicks,
+  }))
   sortedBoard.sort((a, b) => {
     return b.totalPoints - a.totalPoints
   })
@@ -9,8 +12,9 @@ function LeaderBoard({ leaderBoard }) {
       <thead>
         <tr>
           <th>Name</th>
-          <th>Score</th>
+          <th>Total Score</th>
           <th>Tries</th>
+          <th>Average Score</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +23,7 @@ function LeaderBoard({ leaderBoard }) {
             <td>{person.name}</td>
             <td>{person.totalPoints}</td>
             <td>{person.clicks}</td>
+            <td>{person.averagePoints}</td>
           </tr>
         ))}
       </tbody>
